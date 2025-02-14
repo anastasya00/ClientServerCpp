@@ -37,7 +37,7 @@ void server::SocketManager::receivedClient() {
               << std::endl;
   } else {
     std::cout << "Данные не подошли под критерии: строка не менее 2 символов, "
-                 "число кратно 32\n"
+                 "число не кратно 32\n"
               << std::endl;
   }
 }
