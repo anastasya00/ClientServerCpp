@@ -1,0 +1,22 @@
+---
+Checks: >
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  *,
+  -altera-*,
+  -fuchsia-*,
+  -llvmlibc-*,
+  -bugprone-exception-escape,
+  -llvm-header-guard,
+  -modernize-use-nodiscard,
+  -modernize-use-trailing-return-type,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-identifier-length,
+  -readability-magic-numbers
+WarningsAsErrors: '*'
+HeaderFilterRegex: '\.cpp$|\.hpp$'
+CheckOptions:
+  cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor: 'true'
+
