@@ -40,8 +40,8 @@ void threads::ThreadsManager::inputHandler() {
       std::getline(std::cin, inputStr);
       std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
-      if (!std::all_of(inputStr.begin(), inputStr.end(), ::isdigit) &&
-          inputStr.length() > 64 && inputStr.empty()) {
+      if (!std::all_of(inputStr.begin(), inputStr.end(), ::isdigit) ||
+          inputStr.length() > 64 || inputStr.empty()) {
         std::cout << "Длина строки должна не превышать 64 символа и состоять "
                      "только из цифр."
                   << std::endl;
