@@ -13,7 +13,7 @@ std::string buffer::Buffer::getData() {
   std::unique_lock<std::mutex> lock(bufferMutex);
   bufferCV.wait(lock, [this]() { return ready; });
 
-  std::string result = data;
+  std::string result = std::move(data);
   return result;
 }
 

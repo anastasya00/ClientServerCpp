@@ -8,7 +8,8 @@ namespace buffer {
 
 class Buffer {
 public:
-  Buffer() : ready(false) {};
+  Buffer() : ready(false){};
+  ~Buffer() { clearData(); }
 
   std::string getData();
   void setData(const std::string newBuffer);
