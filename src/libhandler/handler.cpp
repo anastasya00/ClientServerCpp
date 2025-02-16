@@ -8,7 +8,7 @@ void handler::HandlerString::sortAndReplace(std::string &str) {
     for (char elem : str) {
       newStr += (elem - '0') % 2 == 0 ? "КВ" : std::string(1, elem);
     }
-    str = newStr;
+    str = std::move(newStr);
   } catch (const std::exception &ex) {
     std::cerr << "Ошибка при обработке строки." << ex.what() << std::endl;
   }
