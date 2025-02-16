@@ -14,7 +14,9 @@ namespace threads {
 
 class ThreadsManager {
 public:
-  ThreadsManager() : stopFlag(false){};
+  ThreadsManager(const std::string &addr, const int port)
+      : address(addr), port(port), stopFlag(false){};
+  ~ThreadsManager() { stopThreads(); }
 
   void startThreads();
   void stopThreads();
@@ -30,5 +32,7 @@ private:
   std::mutex threadMutex;
   std::condition_variable threadCV;
   bool stopFlag;
+  std::string address;
+  int port;
 };
 }; // namespace threads

@@ -38,7 +38,6 @@ void threads::ThreadsManager::inputHandler() {
         std::cout << "\nВведите строку (цифры, до 64 элементов): ";
       }
       std::getline(std::cin, inputStr);
-      std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
       if (!std::all_of(inputStr.begin(), inputStr.end(), ::isdigit) ||
           inputStr.length() > 64 || inputStr.empty()) {
@@ -46,7 +45,6 @@ void threads::ThreadsManager::inputHandler() {
                      "только из цифр."
                   << std::endl;
         continue;
-        ;
       }
       handler_.sortAndReplace(inputStr);
 
@@ -58,13 +56,14 @@ void threads::ThreadsManager::inputHandler() {
       std::this_thread::sleep_for(std::chrono::milliseconds(10));
     }
   } catch (const std::exception &ex) {
-    std::cerr << "Ошибка потока обработки входной строки." << std::endl;
+    std::cerr << "Ошибка потока обработки входной строки: " << ex.what()
+              << std::endl;
   }
 }
 
 void threads::ThreadsManager::processingHandler() {
   try {
-    client::SocketManager socket_("127.0.0.1", 5000);
+    client::SocketManager socket_(address, port);
 
     while (true) {
       std::string bufferData;
@@ -97,6 +96,7 @@ void threads::ThreadsManager::processingHandler() {
       }
     }
   } catch (const std::exception &ex) {
-    std::cerr << "Ошибка потока обработки данных буфера." << std::endl;
+    std::cerr << "Ошибка потока обработки данных буфера: " << ex.what()
+              << std::endl;
   }
 }
