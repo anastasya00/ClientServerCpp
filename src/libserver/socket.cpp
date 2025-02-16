@@ -15,6 +15,9 @@ bool server::SocketManager::connectClient() {
   addrClient.sin_family = AF_INET;
   addrClient.sin_port = htons(port);
 
+  int opt = 1;
+  setsockopt(socketFD, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+
   if (inet_pton(AF_INET, address.c_str(), &addrClient.sin_addr) <= 0) {
     std::cerr << "Ошибка при преобразовании адреса клиента в формат для сети."
               << std::endl;
@@ -52,10 +55,10 @@ void server::SocketManager::waitData() {
       continue;
     }
 
-    char* buffer = new char[1024];
+    char *buffer = new char[1024];
     ssize_t byteRead = read(clientSocket, buffer, sizeof(buffer) - 1);
     if (byteRead > 0) {
-      receivedData = buffer;
+      receivedData = std::string(buffer, byteRead);
       delete[] buffer;
       receivedClient();
     } else {
@@ -68,8 +71,11 @@ void server::SocketManager::waitData() {
 }
 
 void server::SocketManager::reconnectClient() {
-  while (!connectClient()) {
+  while (true) {
     std::cerr << "Повторная попытка подключения к клиенту..." << std::endl;
+    if (connectClient()) {
+      return;
+    }
     sleep(2);
   }
 }
