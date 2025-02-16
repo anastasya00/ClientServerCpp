@@ -5,7 +5,7 @@
 #include <libclient/libthreads/threads.hpp>
 
 int main() {
-  threads::ThreadsManager threadsHandler;
+  threads::ThreadsManager threadsHandler("127.0.0.1", 5000);
 
   threadsHandler.startThreads();
   threadsHandler.waitStopThreads();
