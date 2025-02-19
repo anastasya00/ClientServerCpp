@@ -25,4 +25,10 @@ target_include_directories(mainServer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(mainServer socketServer)
 target_link_libraries(socketServer handlerClient)
 
+add_executable(tests tests/libhandler_test.cpp tests/libbuffer_test.cpp)
+target_link_libraries(tests handlerClient bufferClient gtest_main)
+target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR})
+
+include(GoogleTest)
+gtest_discover_tests(tests)
 
