@@ -9,4 +9,7 @@ project(
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/cmake)
 include(CompileOptions)
 
+enable_testing()
+
+add_subdirectory(external)
 add_subdirectory(src)
