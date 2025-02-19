@@ -31,8 +31,7 @@ int handler::HandlerString::calcSumElem(const std::string &str) {
 }
 
 bool handler::HandlerString::checkStringLength(const std::string &str) {
-  std::cout << str << std::endl;
-  if (str.length() > 2 && std::stoi(str) % 32 == 0)
+  if (str.length() >= 2 && std::stoi(str) % 32 == 0)
     return true;
   return false;
 }
