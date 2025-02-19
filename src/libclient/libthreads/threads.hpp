@@ -31,8 +31,8 @@ private:
   std::thread processingThread;
   std::mutex threadMutex;
   std::condition_variable threadCV;
-  bool stopFlag;
   std::string address;
   int port;
+  bool stopFlag;
 };
 }; // namespace threads
